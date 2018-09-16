@@ -37,7 +37,7 @@ class LooperActivity : AppCompatActivity() {
         const val TAG = "LooperActivity"
     }
 
-    class MyHandlerThread(name: String) : Thread(name) {
+    class MyHandler2Thread(name: String) : Thread(name) {
 
         var mHandler: Handler? = null
 
@@ -59,13 +59,13 @@ class LooperActivity : AppCompatActivity() {
         }
     }
 
-    class MyHandler2Thread(name: String) : HandlerThread(name) {
+    class MyHandlerThread(name: String) : HandlerThread(name) {
         var mHandler: Handler? = null
 
         override fun onLooperPrepared() {
             mHandler = object : Handler(Looper.myLooper()) {
                 override fun handleMessage(msg: Message) {
-                    Log.d(MyHandlerThread.TAG, "获得了message ${msg.what}")
+                    Log.d(TAG, "获得了message ${msg.what}")
 
                     super.handleMessage(msg)
                 }
