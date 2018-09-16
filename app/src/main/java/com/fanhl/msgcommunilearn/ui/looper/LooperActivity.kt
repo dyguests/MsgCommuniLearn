@@ -60,11 +60,16 @@ class LooperActivity : AppCompatActivity() {
     }
 
     class MyHandler2Thread(name: String) : HandlerThread(name) {
-        override fun run() {
-            if (Looper.myLooper() == null) {
-                Looper.prepare()
+        var mHandler: Handler? = null
+
+        override fun onLooperPrepared() {
+            mHandler = object : Handler(Looper.myLooper()) {
+                override fun handleMessage(msg: Message) {
+                    Log.d(MyHandlerThread.TAG, "获得了message ${msg.what}")
+
+                    super.handleMessage(msg)
+                }
             }
-            super.run()
         }
     }
 }
